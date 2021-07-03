@@ -1,0 +1,597 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Emmett Woo">
+  <meta name="keywords" content="emmettwoo, 博客">
+  
+  <title>用 VirtualBox 安装 CentOS - Emmett Woo&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blog.woohoo.top","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":120,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"UA-113893769-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/index.xml" title="Emmett Woo's Blog" type="application/rss+xml">
+</head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Emmett Woo's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/index.xml">
+                <i class="iconfont icon-rss"></i>
+                订阅
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-pen"></i>
+                文章
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.instagram.com/emmettwoo/">
+                <i class="iconfont icon-instagram-fill"></i>
+                图片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://kg.qq.com/node/personal?uid=649f988720283f8a35">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://space.bilibili.com/273000997">
+                <i class="iconfont icon-youtube-fill"></i>
+                视频
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="用 VirtualBox 安装 CentOS">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-02-09 00:00" pubdate>
+        2018年2月9日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      31
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">用 VirtualBox 安装 CentOS</h1>
+            
+            <div class="markdown-body">
+              <h1 id="零-前言"><a href="#零-前言" class="headerlink" title="零. 前言"></a>零. 前言</h1><p>因为专业原因，<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/linux/27050?fr=aladdin">Linux</a> 似乎是不得不学的一个 Operating System。</p>
+<p>所以选择了 Linux 的一个发行版 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/centos">CentOS</a> 来学习使用。</p>
+<p>又想到了昨天刚在 github 搭了博客，那就写成博文吧哈哈哈。</p>
+<p>（P.S. 其实对于新手的话，感觉 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/ubuntu">Ubuntu</a> 会好看和好用多了）</p>
+<h1 id="一-准备工作"><a href="#一-准备工作" class="headerlink" title="一. 准备工作"></a>一. 准备工作</h1><h2 id="1-1-下载-CentOS-镜像"><a href="#1-1-下载-CentOS-镜像" class="headerlink" title="1.1 下载 CentOS 镜像"></a>1.1 下载 CentOS 镜像</h2><p>前往官网 <a target="_blank" rel="noopener" href="http://centos.org/">centos.org</a> 下载 CentOS 的镜像文件（即系统安装包，如果你喜欢这么称呼它）</p>
+<p>好吧，官网是英文的，如果你这点英语都看不懂的话…… 还怎么使用 Linux 和 Coding ？</p>
+<p>别别别，别打我，我一步一步说还不行吗…… 首先打开官网是下面这个样子：</p>
+<p><img src="https://blog.woohoo.top/images/Install-CentOS-on-VirtualBox/Install-CentOS-on-VirtualBox_001.jpg" srcset="/img/loading.gif" lazyload alt="Install-CentOS-on-VirtualBox_001"></p>
+<p>点击 Get CentOS Now （马上获取 CentOS），进入选择下载界面：</p>
+<p><img src="https://blog.woohoo.top/images/Install-CentOS-on-VirtualBox/Install-CentOS-on-VirtualBox_002.jpg" srcset="/img/loading.gif" lazyload alt="Install-CentOS-on-VirtualBox_002"></p>
+<p>默认是下载最新 64 位版本的 ISO 文件，目前最新版本是 CentOS 7 （1708）。</p>
+<p>上图中可以看到下载的类型分为 DVD ISO / Everything ISO / Minimal ISO 三种。</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs 1c">DVD ISO ：<br>适用于刻录进DVD光盘（Max：<span class="hljs-number">4.7</span>G）的镜像文件，其中包括了系统必要和常用的文件<span class="hljs-meta">&amp;软件。</span><br><br>Everything ISO ：<br>包含该系统安装时可能用用到的所有文件<span class="hljs-meta">&amp;软件，但文件较大。</span><br>（目前大小是<span class="hljs-number">8.09</span>G，也就是打算刻录进U盘的话，<span class="hljs-number">8</span>G的U盘会不够哦）<br><br>Minimal ISO ：<br>仅该系统安装时必要的最少量文件<span class="hljs-meta">&amp;软件。</span><br></code></pre></td></tr></table></figure>
+
+<p>选择好自己需要的类型后，点击对应按钮，会进入镜像源选择界面，在上方的列表里随便选一个下载即可。</p>
+<p>（镜像源：镜像文件的来源，一般由第三方机构服务器负责储存并提供下载，例如网易、搜狐、清华大学。我所在的 <em>华南农业大学珠江学院 网络工作室</em> 据说接下来也将部署一个镜像服务器）</p>
+<h2 id="1-2-下载安装-VirtualBox"><a href="#1-2-下载安装-VirtualBox" class="headerlink" title="1.2 下载安装 VirtualBox"></a>1.2 下载安装 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/VirtualBox">VirtualBox</a></h2><p>同样的，前往官网的<a target="_blank" rel="noopener" href="https://www.virtualbox.org/wiki/Downloads">下载页面</a> ：</p>
+<p><img src="https://blog.woohoo.top/images/Install-CentOS-on-VirtualBox/Install-CentOS-on-VirtualBox_003.jpg" srcset="/img/loading.gif" lazyload alt="Install-CentOS-on-VirtualBox_003"></p>
+<p>好烦，又是英文的，总之选择 Windows hosts 就是了，即下载 Windows 作为宿主机的软件版本。（简单来说就是下载 exe）</p>
+<p>这个软件安装呢，没有什么需要注意的地方，一路跟着引导就是了。（才不是因为我要偷懒呢～）</p>
+<h2 id="1-3-新建虚拟机"><a href="#1-3-新建虚拟机" class="headerlink" title="1.3 新建虚拟机"></a>1.3 新建<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%99%9A%E6%8B%9F%E6%9C%BA/104440?fr=aladdin">虚拟机</a></h2><p>打开 VirtualBox，点击左上角的新建，填写虚拟机名称，随便起一个名字。</p>
+<p><img src="https://blog.woohoo.top/images/Install-CentOS-on-VirtualBox/Install-CentOS-on-VirtualBox_004.jpg" srcset="/img/loading.gif" lazyload alt="Install-CentOS-on-VirtualBox_004"></p>
+<p>有趣的是，如果 VirtualBox 识别到名字里有操作系统的名称，会自动识别并帮你选好下面两个选项，如果没有的话，请手动设置成 Linux（Red Hat 64bit）。</p>
+<figure class="highlight erlang-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs erlang-repl">为什么是Red Hat <span class="hljs-number">64</span>bit 而不是 CentOS <span class="hljs-number">64</span>bit，完全可以把CentOS理解为RedHat AS系列!它完全就是对RedHat AS进行改进后发布的!各种操作、使用和RedHat没有区别!只是Red Hat是收费的，而CentOS是免费的。<br></code></pre></td></tr></table></figure>
+
+<p>接下来，基本上一路按照引导点下一步就行了。</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs x86asm">主要是对虚拟机硬件条件进行一些配置，包括内存和硬盘。更多<span class="hljs-meta">CPU</span>、光盘、网络之类的设置可以在新建虚拟机后通过“新建”旁边的“设置”按钮进行配置。具体的设置根据系统需求和源计算机本身的硬件条件为基础。<br>其中注意三个点：<br><br><span class="hljs-number">1</span>.如果运行无图形界面的CentOS，内存默认1024M肯定够了，如果要运行图形界面或作为服务器，可根据需求进行调整。<br><span class="hljs-number">2</span>.在配置硬盘容量的时候，并不会占用实际容量，你设置的只是一个额度，具体占用到本机硬盘容量的是虚拟机内已使用的硬盘容量。所以无需担心占用过高的硬盘空间。另外，默认虚拟硬盘文件会放在C盘，在新建虚拟机时，可以在调整容量界面选择虚拟硬盘存放位置，放到容量比较充裕的磁盘分区下。<br><span class="hljs-number">3</span>.并不是配置设置得越高越好，因为实际上你是分出了真实的内存、<span class="hljs-meta">CPU</span>等来供虚拟机使用的，要考虑除虚拟机外，原本系统和软件所需要的硬件配置是否够用。虚拟机的配置可在虚拟机关机后进行调整，所以也无需担心设置的参数不合适怎么办。<br></code></pre></td></tr></table></figure>
+
+<h1 id="二-安装系统"><a href="#二-安装系统" class="headerlink" title="二. 安装系统"></a>二. 安装系统</h1><h2 id="2-1-进入安装界面"><a href="#2-1-进入安装界面" class="headerlink" title="2.1 进入安装界面"></a>2.1 进入安装界面</h2><p>打开 VirtualBox，在左侧虚拟机目录里选择你刚才创建的虚拟机，点击左上角 “新建” 旁边的 “设置”。</p>
+<p>选择 “存储”-“没有盘片”- 点击右边的光盘按钮 -“选择一个虚拟光盘文件…”，然后选择在 1.1 步骤里下载的 iso 文件（系统镜像）</p>
+<p><img src="https://blog.woohoo.top/images/Install-CentOS-on-VirtualBox/Install-CentOS-on-VirtualBox_005.jpg" srcset="/img/loading.gif" lazyload alt="Install-CentOS-on-VirtualBox_005"></p>
+<p>点击 “OK” 确认，并点击上方导航栏的 “启动” 按钮。</p>
+<p><img src="https://blog.woohoo.top/images/Install-CentOS-on-VirtualBox/Install-CentOS-on-VirtualBox_006.jpg" srcset="/img/loading.gif" lazyload alt="Install-CentOS-on-VirtualBox_006"></p>
+<p>（虚拟机运行期间，会自动捕获你的鼠标，你的鼠标将只能在虚拟机内使用，此时按下键盘的右侧 ctrl 键可以取消本次捕获）</p>
+<p>虚拟机启动，进入安装界面：</p>
+<p><img src="https://blog.woohoo.top/images/Install-CentOS-on-VirtualBox/Install-CentOS-on-VirtualBox_007.jpg" srcset="/img/loading.gif" lazyload alt="Install-CentOS-on-VirtualBox_007"></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs markdown">你们要的翻译：<br><span class="hljs-bullet">1.</span> 开始安装CentOS 7<br><span class="hljs-bullet">2.</span> 测试光盘并安装CentOS 7<br><span class="hljs-bullet">3.</span> 故障排除<br>（如果60秒内没有操作，将自动进入第二项）<br></code></pre></td></tr></table></figure>
+
+<p>选择第二项（其实选择第一项也行，跳过盘片检查）开始检查光盘内容后进入安装界面：</p>
+<p><img src="https://blog.woohoo.top/images/Install-CentOS-on-VirtualBox/Install-CentOS-on-VirtualBox_008.jpg" srcset="/img/loading.gif" lazyload alt="Install-CentOS-on-VirtualBox_008"></p>
+<p>嘿，兄 dei，选择语言界面，你懂的，拉到最下面选择中文，终于有中文了嘤嘤嘤。</p>
+<p><img src="https://blog.woohoo.top/images/Install-CentOS-on-VirtualBox/Install-CentOS-on-VirtualBox_009.jpg" srcset="/img/loading.gif" lazyload alt="Install-CentOS-on-VirtualBox_009"></p>
+<p>选好中文点击 “继续”，出现系统配置界面，乍一看有点多，其实很多不用你设置，just take it easy。</p>
+<p>你所必需设置的只有安装位置，推荐设置的有 “软件选择” 及 “网络和主机名”。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs">“网络和主机名”：在虚拟机里，默认是配置好桥接网络了，你只需要进入该设置并打开以太网就行了。<br>“软件选择”：如果你下载的是DVD或者Everything类型的镜像文件，那么你可以根据需要选择要安装的软件包。<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-2-设置安装位置"><a href="#2-2-设置安装位置" class="headerlink" title="2.2 设置安装位置"></a>2.2 设置安装位置</h2><p><img src="https://blog.woohoo.top/images/Install-CentOS-on-VirtualBox/Install-CentOS-on-VirtualBox_010.jpg" srcset="/img/loading.gif" lazyload alt="Install-CentOS-on-VirtualBox_010"></p>
+<p>其实你完全可以选择 “自动配置分区”，但是为了让大家进一步了解 Linux，这次我们用手动。</p>
+<p>选择我要配置分区，然后左上角完成，进入配置界面。</p>
+<p>你可以选择左侧的 “点这里自动创建他们”，或者</p>
+<p>点击左下角的添加按钮，会看到我们需要设置挂载点和需要容量两个选项。</p>
+<p><img src="https://blog.woohoo.top/images/Install-CentOS-on-VirtualBox/Install-CentOS-on-VirtualBox_011.jpg" srcset="/img/loading.gif" lazyload alt="Install-CentOS-on-VirtualBox_011"></p>
+<p>关于挂载点的含义，可以参考<a target="_blank" rel="noopener" href="http://blog.csdn.net/yj_fq/article/details/44259427">这里</a></p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">一般设置至少三个分区： <br>一个挂载到<span class="hljs-keyword">swap</span>，容量是内存容量的两倍。<br>一个挂载到/boot，容量最少<span class="hljs-number">100</span>M，默认<span class="hljs-number">1024</span>M<br>一个挂载到/，容量随便，一般为剩下的所有容量。<br></code></pre></td></tr></table></figure>
+
+<p>（挂载到 / 意味着除了 boot 引导文件，其他文件都会存在这里。是你能用的 “整个硬盘空间”。）</p>
+<p>所有采用 Linux 内核的操作系统，分区都可参考以上，所以特意拿出来介绍。</p>
+<p>如果想更深入了解 Linux 的知识，推荐购买《鳥哥的 Linux 私房菜》丛书或者访问他们的<a target="_blank" rel="noopener" href="http://linux.vbird.org/">官网</a>免费阅读教材</p>
+<h2 id="2-3-创建系统用户"><a href="#2-3-创建系统用户" class="headerlink" title="2.3 创建系统用户"></a>2.3 创建系统用户</h2><p>确定好分区后点击完成回到安装配置界面，就可以点击右下角开始安装了。</p>
+<p><img src="https://blog.woohoo.top/images/Install-CentOS-on-VirtualBox/Install-CentOS-on-VirtualBox_012.jpg" srcset="/img/loading.gif" lazyload alt="Install-CentOS-on-VirtualBox_012"></p>
+<p>现在，CentOS 已经开始安装了，与此同时，你需要设置 Root 密码和用户的用户名和密码。</p>
+<p>是的，CentOS 是支持多用户的操作系统，其中 root 用户相当于 windows 下的 administrator，是最高权限拥有者（系统管理员）。</p>
+<p>通常情况下我们不会以 root 账户登录系统，因为权限太高，一不小心把系统文件搞坏了就麻烦了。所以我们还要创建一个新用户。</p>
+<p>创建流程就不介绍了，点进去填写用户信息就行了。（用户均为本地用户，不需要联网注册）</p>
+<p>配置完成、安装完成后，按要求重启便可以体验到 CentOS 系统了！</p>
+<h1 id="三-初次使用配置"><a href="#三-初次使用配置" class="headerlink" title="三. 初次使用配置"></a>三. 初次使用配置</h1><p>不存在的，教程到此结束，因为你已经成功地安装好了 CentOS。没我的事了 2333</p>
+<p>如果你想在 Linux 下编程、搭建服务器等，请参考相关的教程进行环境搭建即可。</p>
+<h2 id="3-1-安装完成重启后是黑框"><a href="#3-1-安装完成重启后是黑框" class="headerlink" title="3.1 安装完成重启后是黑框"></a>3.1 安装完成重启后是黑框</h2><p><img src="https://blog.woohoo.top/images/Install-CentOS-on-VirtualBox/Install-CentOS-on-VirtualBox_013.jpg" srcset="/img/loading.gif" lazyload alt="Install-CentOS-on-VirtualBox_013"></p>
+<p>如果你安装重启后，是这样的界面，别担心…… 你估计是安装了 minimal 版本，最精简的系统包，还记得吗？</p>
+<p>所以呢，它是不具备着图形界面的，没有图形界面的系统占用资源更少，执行效率更高，莫名其妙的问题更少，也算是 Linux 的一种精髓所在。</p>
+<p>通常情况下，服务器的系统都不会安装图形界面，以确保效率和稳定性。屁话扯了这么多，所以你的系统怎么办？</p>
+<p>其实现在你已经在登陆界面了，试着敲敲你的键盘，嗯，没错，输入你的用户名，回车。</p>
+<p>接下来，输入你的密码，欸？没反应吗？别方，其实是出于安全考虑，没有显示出来而已，尽管输入后回车。</p>
+<p><img src="https://blog.woohoo.top/images/Install-CentOS-on-VirtualBox/Install-CentOS-on-VirtualBox_014.jpg" srcset="/img/loading.gif" lazyload alt="Install-CentOS-on-VirtualBox_014"></p>
+<p>像这样，就成功登陆了，接下来可以执行各种操作指令了，如果你不会的话，Emmm，可以找 Linux 的使用教程来学习。</p>
+<p><img src="https://blog.woohoo.top/images/Install-CentOS-on-VirtualBox/Install-CentOS-on-VirtualBox_015.jpg" srcset="/img/loading.gif" lazyload alt="Install-CentOS-on-VirtualBox_015"></p>
+<p>如果是这个样子，说明用户名或者密码错误，再试一次吧～</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Tutorials/">Tutorials</a>
+                    
+                      <a class="hover-with-bg" href="/tags/System/">System</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://blog.woohoo.top/2018/02/Install-CentOS-on-VirtualBox/';
+          this.page.identifier = '/2018/02/Install-CentOS-on-VirtualBox/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'emmett-woos-blog' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        粤ICP备20034331号
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44512202000075"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" alt="police-icon"/>
+            
+            <span>粤公网安备44512202000075号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-113893769-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

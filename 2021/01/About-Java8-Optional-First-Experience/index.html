@@ -1,0 +1,590 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Emmett Woo">
+  <meta name="keywords" content="emmettwoo, 博客">
+  
+  <title>Java8 Optional类初体验 - Emmett Woo&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blog.woohoo.top","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":120,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"UA-113893769-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/index.xml" title="Emmett Woo's Blog" type="application/rss+xml">
+</head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Emmett Woo's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/index.xml">
+                <i class="iconfont icon-rss"></i>
+                订阅
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-pen"></i>
+                文章
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.instagram.com/emmettwoo/">
+                <i class="iconfont icon-instagram-fill"></i>
+                图片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://kg.qq.com/node/personal?uid=649f988720283f8a35">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://space.bilibili.com/273000997">
+                <i class="iconfont icon-youtube-fill"></i>
+                视频
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java8 Optional类初体验">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-24 14:38" pubdate>
+        2021年1月24日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      19
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java8 Optional类初体验</h1>
+            
+            <div class="markdown-body">
+              <p>在现在的公司实习已经一个多月了，在每天的做任务改八哥中，要说给我印象最深，用了以后觉得最爽的一个新知识，就非Optional莫属了。（于是上班偷偷摸鱼整理了这篇文章？）</p>
+<p>Optional是Java8引入的一个很有趣的特性，用来解决最经常遇到的烦人问题: NullPointerException（空指针异常）。本质上，Optional是一个包装类，支持泛型地将对象保存在Optional类中，并提供许多有意思的方法来调用和处理存储的对象为空时的异常。</p>
+<p>什么？如果调用的Option对象为空？放心啦，你不会去手动new一个Optional对象的，Optional是一个final类，唯二的构造方法都是private的，你需要通过Optional.of()等static方法来获取一个新对象，所以并不会收到一个null对象哦。</p>
+<p>接下来跟着代码一步步接近Optional，感受其中的奥秘吧。</p>
+<h1 id="一-不使用-Optional-的情况"><a href="#一-不使用-Optional-的情况" class="headerlink" title="一. 不使用 Optional 的情况"></a>一. 不使用 Optional 的情况</h1><ol>
+<li>常规的调用逻辑</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">String isocode = user.getAddress().getCountry().getIsocode().toUpperCase();<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>常规的 null 处理</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span> (user != <span class="hljs-keyword">null</span>) &#123;<br>	Address address = user.getAddress();<br>	<span class="hljs-keyword">if</span> (address != <span class="hljs-keyword">null</span>) &#123;<br>		Country country = address.getCountry();<br>		<span class="hljs-keyword">if</span> (country != <span class="hljs-keyword">null</span>) &#123;<br>			String isocode = country.getIsocode();<br>			<span class="hljs-keyword">if</span> (isocode != <span class="hljs-keyword">null</span>) &#123;<br>				isocode = isocode.toUpperCase();<br>			&#125;<br>		&#125;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="二-Optional-对象的创建"><a href="#二-Optional-对象的创建" class="headerlink" title="二. Optional 对象的创建"></a>二. Optional 对象的创建</h1><ol>
+<li><p>empty(): 尝试访问 emptyOpt 变量的值会导致 NoSuchElementException。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">Optional&lt;User&gt; emptyOpt = Optional.empty();<br>emptyOpt.get();<br></code></pre></td></tr></table></figure></li>
+<li><p>of(): 如果user为空，会抛出NullPointerException。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Optional&lt;User&gt; opt = Optional.of(user);<br></code></pre></td></tr></table></figure></li>
+<li><p>ofNullable(): 如果对象即可能是 null 也可能是非 null，你就应该使用 ofNullable() 方法。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Optional&lt;User&gt; opt = Optional.ofNullable(user);<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="三-Optional-值的访问"><a href="#三-Optional-值的访问" class="headerlink" title="三. Optional 值的访问"></a>三. Optional 值的访问</h1><ol>
+<li><p>get(): 如果opt为空，会抛出NullPointerException。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">String name = <span class="hljs-string">&quot;John&quot;</span>;<br>Optional&lt;String&gt; opt = Optional.ofNullable(name);<br>assertEquals(<span class="hljs-string">&quot;John&quot;</span>, opt.get());<br></code></pre></td></tr></table></figure></li>
+<li><p>isPresent(): 检查对象是否存在，null 时为 false。</p>
+</li>
+<li><p>ifPresent(): 只有 user 用户不为 null 的时候才会执行断言。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">opt.ifPresent( u -&gt; assertEquals(user.getEmail(), u.getEmail()));<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="四-Optional-空值的处理"><a href="#四-Optional-空值的处理" class="headerlink" title="四. Optional 空值的处理"></a>四. Optional 空值的处理</h1><ol>
+<li><p>orElse(): 如果user为空，返回user2，否则返回user。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">User user = <span class="hljs-keyword">null</span>;<br>User user2 = <span class="hljs-keyword">new</span> User(<span class="hljs-string">&quot;anna@gmail.com&quot;</span>, <span class="hljs-string">&quot;1234&quot;</span>);<br>User result = Optional.ofNullable(user).orElse(user2);<br><br>assertEquals(user2.getEmail(), result.getEmail());<br></code></pre></td></tr></table></figure></li>
+<li><p>orElseGet(): 如果user为空，执行Supplier(供应者) 函数式接口，并将返回其执行结果。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">User result = Optional.ofNullable(user).orElseGet( () -&gt; user2);<br></code></pre></td></tr></table></figure></li>
+<li><p>orElse() 和 orElseGet() 的不同之处</p>
+<ol>
+<li>当对象为空而返回默认对象时，行为并无差异。</li>
+<li>当对象非空值时，两个方法都会返回对应的非空值。不过，orElse() 方法仍然创建了 User 对象，orElseGet() 方法不创建 User 对象。</li>
+</ol>
+</li>
+<li><p>orElseThrow(): 在对象为空的时候抛出异常，而不是返回备选的值。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">User result = Optional.ofNullable(user)<br>  .orElseThrow( () -&gt; <span class="hljs-keyword">new</span> IllegalArgumentException());<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="五-Optional-值的转换和过滤"><a href="#五-Optional-值的转换和过滤" class="headerlink" title="五. Optional 值的转换和过滤"></a>五. Optional 值的转换和过滤</h1><ol>
+<li><p>map(): 将值作为参数调用函数，然后将返回的值包装在 Optional 中。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">User user = <span class="hljs-keyword">new</span> User(<span class="hljs-string">&quot;anna@gmail.com&quot;</span>, <span class="hljs-string">&quot;1234&quot;</span>);<br>String email = Optional.ofNullable(user)<br>  .map(u -&gt; u.getEmail()).orElse(<span class="hljs-string">&quot;default@gmail.com&quot;</span>);<br><span class="hljs-comment">// 上面map()后是 Optional 对象，所以可以链式调用orElse()。</span><br>assertEquals(email, user.getEmail());<br></code></pre></td></tr></table></figure></li>
+<li><p>flatMap(): 过程与map()一致，但直接返回结果，而非包装为 Optional。</p>
+</li>
+<li><p>类方法返回 Optional 对象</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 类的定义</span><br><span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>&#123;    <br>	<span class="hljs-keyword">private</span> String position;<br><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> Optional&lt;String&gt; <span class="hljs-title">getPosition</span><span class="hljs-params">()</span> </span>&#123;<br>		<span class="hljs-keyword">return</span> Optional.ofNullable(position);<br>	&#125;<br><br>	<span class="hljs-comment">//...</span><br>&#125;<br><br><span class="hljs-comment">// 调用示例</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenFlatMap_thenOk</span><span class="hljs-params">()</span> </span>&#123;<br>	User user = <span class="hljs-keyword">new</span> User(<span class="hljs-string">&quot;anna@gmail.com&quot;</span>, <span class="hljs-string">&quot;1234&quot;</span>);<br>	user.setPosition(<span class="hljs-string">&quot;Developer&quot;</span>);<br>	String position = Optional.ofNullable(user)<br>	  .flatMap(u -&gt; u.getPosition()).orElse(<span class="hljs-string">&quot;default&quot;</span>);<br><br>	assertEquals(position, user.getPosition().get());<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><p>filter(): 接受一个 Predicate 参数，true 返回值，false返回空 Optional。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">User user = <span class="hljs-keyword">new</span> User(<span class="hljs-string">&quot;anna@gmail.com&quot;</span>, <span class="hljs-string">&quot;1234&quot;</span>);<br>Optional&lt;User&gt; result = Optional.ofNullable(user)<br>  .filter(u -&gt; u.getEmail() != <span class="hljs-keyword">null</span> &amp;&amp; u.getEmail().contains(<span class="hljs-string">&quot;@&quot;</span>));<br><br>assertTrue(result.isPresent());<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="六-Optional-类的链式方法演示"><a href="#六-Optional-类的链式方法演示" class="headerlink" title="六. Optional 类的链式方法演示"></a>六. Optional 类的链式方法演示</h1><ol>
+<li><p>嵌套类，getter返回 Optional 对象</p>
+<p> <img src="https://blog.woohoo.top/images/About-Java8-Optional-First-Experience/About-Java8-Optional-First-Experience_001.jpg" srcset="/img/loading.gif" lazyload alt="About-Java8-Optional-First-Experience_001"></p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>&#123;<br>	<span class="hljs-keyword">private</span> Address address;<br><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> Optional&lt;Address&gt; <span class="hljs-title">getAddress</span><span class="hljs-params">()</span> </span>&#123;<br>		<span class="hljs-keyword">return</span> Optional.ofNullable(address);<br>	&#125;<br><br>	<span class="hljs-comment">// ...</span><br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Address</span> </span>&#123;<br>	<span class="hljs-keyword">private</span> Country country;<br><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> Optional&lt;Country&gt; <span class="hljs-title">getCountry</span><span class="hljs-params">()</span> </span>&#123;<br>		<span class="hljs-keyword">return</span> Optional.ofNullable(country);<br>	&#125;<br><br>	<span class="hljs-comment">// ...</span><br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><p>测试方法</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java">User user = <span class="hljs-keyword">new</span> User(<span class="hljs-string">&quot;anna@gmail.com&quot;</span>, <span class="hljs-string">&quot;1234&quot;</span>);<br><br><span class="hljs-comment">// 因为该自定义类返回的值本身就是 Optional 对象，所以用flatMap();</span><br>String result = Optional.ofNullable(user)<br>  .flatMap(u -&gt; u.getAddress())<br>  .flatMap(a -&gt; a.getCountry())<br>  .map(c -&gt; c.getIsocode())<br>  .orElse(<span class="hljs-string">&quot;default&quot;</span>);<br><br>assertEquals(result, <span class="hljs-string">&quot;default&quot;</span>);<br></code></pre></td></tr></table></figure></li>
+<li><p>简化测试方法（Lambda）</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">String result = Optional.ofNullable(user)<br>  .flatMap(User::getAddress)<br>  .flatMap(Address::getCountry)<br>  .map(Country::getIsocode)<br>  .orElse(<span class="hljs-string">&quot;default&quot;</span>)<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="七-参考来源"><a href="#七-参考来源" class="headerlink" title="七. 参考来源"></a>七. 参考来源</h1><p>更多信息以及关于Java9对Optional的增强，可以参考:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/java/java8-optional-class.html">https://www.runoob.com/java/java8-optional-class.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/d81a5f7c9c4e">https://www.jianshu.com/p/d81a5f7c9c4e</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhangboyu/p/7580262.html">https://www.cnblogs.com/zhangboyu/p/7580262.html</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Backend/">Backend</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://blog.woohoo.top/2021/01/About-Java8-Optional-First-Experience/';
+          this.page.identifier = '/2021/01/About-Java8-Optional-First-Experience/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'emmett-woos-blog' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        粤ICP备20034331号
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44512202000075"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" alt="police-icon"/>
+            
+            <span>粤公网安备44512202000075号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-113893769-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

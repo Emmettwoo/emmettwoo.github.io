@@ -1,0 +1,584 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Emmett Woo">
+  <meta name="keywords" content="emmettwoo, 博客">
+  
+  <title>京东抢购助手 使用教程 - Emmett Woo&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blog.woohoo.top","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":120,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":"UA-113893769-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/index.xml" title="Emmett Woo's Blog" type="application/rss+xml">
+</head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Emmett Woo's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/index.xml">
+                <i class="iconfont icon-rss"></i>
+                订阅
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-pen"></i>
+                文章
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.instagram.com/emmettwoo/">
+                <i class="iconfont icon-instagram-fill"></i>
+                图片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://kg.qq.com/node/personal?uid=649f988720283f8a35">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://space.bilibili.com/273000997">
+                <i class="iconfont icon-youtube-fill"></i>
+                视频
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="京东抢购助手 使用教程">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-02-06 00:00" pubdate>
+        2020年2月6日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      15
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">京东抢购助手 使用教程</h1>
+            
+            <div class="markdown-body">
+              <h1 id="一-写在前面"><a href="#一-写在前面" class="headerlink" title="一. 写在前面"></a>一. 写在前面</h1><h2 id="1-1-关于京东抢购助手"><a href="#1-1-关于京东抢购助手" class="headerlink" title="1.1 关于京东抢购助手"></a>1.1 关于京东抢购助手</h2><p>京东抢购助手：包含登录，查询商品库存 / 价格，添加 / 清空购物车，抢购商品 (下单)，查询订单等功能。<br>最近特殊情况，很多人用来抢口罩。也是我接触这个项目的原因，接下来的配置也是围绕它展开的。</p>
+<h2 id="1-2-我可以使用吗？"><a href="#1-2-我可以使用吗？" class="headerlink" title="1.2 我可以使用吗？"></a>1.2 我可以使用吗？</h2><ol>
+<li>有编程基础的<br>直接前往<a target="_blank" rel="noopener" href="https://github.com/tychxn/jd-assistant">项目地址</a>，下载后按照 wiki 配置运行即可。</li>
+<li>没有编程基础的<br>一台电脑和足够的耐心，边看下面的教程边操作。</li>
+</ol>
+<hr>
+<h1 id="二-京东抢购助手的安装"><a href="#二-京东抢购助手的安装" class="headerlink" title="二. 京东抢购助手的安装"></a>二. 京东抢购助手的安装</h1><h2 id="2-1-下载地址（二选一）"><a href="#2-1-下载地址（二选一）" class="headerlink" title="2.1 下载地址（二选一）"></a>2.1 下载地址（二选一）</h2><ol>
+<li>点击<a target="_blank" rel="noopener" href="https://github.com/tychxn/jd-assistant/archive/master.zip">这里</a>下载</li>
+<li>从项目地址<a target="_blank" rel="noopener" href="https://github.com/tychxn/jd-assistant">这里</a>下载</li>
+</ol>
+<h2 id="2-2-文件解压"><a href="#2-2-文件解压" class="headerlink" title="2.2 文件解压"></a>2.2 文件解压</h2><p>将下载的 zip 压缩包解压到任意非系统盘 (C:) 位置。<br>进入解压目录准备进行配置。</p>
+<h2 id="2-3-参数配置"><a href="#2-3-参数配置" class="headerlink" title="2.3 参数配置"></a>2.3 参数配置</h2><h3 id="2-3-1-config-ini（用户数据）"><a href="#2-3-1-config-ini（用户数据）" class="headerlink" title="2.3.1 config.ini（用户数据）"></a>2.3.1 config.ini（用户数据）</h3><p>-&gt; <a target="_blank" rel="noopener" href="https://github.com/tychxn/jd-assistant/wiki/3.-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98#3-eid-fp-track_id-risk_control-%E5%8F%82%E6%95%B0%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96">官方教程</a></p>
+<p><img src="https://blog.woohoo.top/images/JD-Assistant-Using-Manual/config.jpg" srcset="/img/loading.gif" lazyload alt="config.ini配置示例图片"></p>
+<h3 id="2-3-2-main-py（抢购函数）"><a href="#2-3-2-main-py（抢购函数）" class="headerlink" title="2.3.2 main.py（抢购函数）"></a>2.3.2 main.py（抢购函数）</h3><p>-&gt; <a target="_blank" rel="noopener" href="https://github.com/tychxn/jd-assistant/wiki/1.-%E4%BA%AC%E4%B8%9C%E6%8A%A2%E8%B4%AD%E5%8A%A9%E6%89%8B%E7%94%A8%E6%B3%95#313-%E6%9C%89%E8%B4%A7%E6%8F%90%E4%BA%A4%E8%AE%A2%E5%8D%95%E7%A4%BA%E4%BE%8B">官方教程</a></p>
+<p>这个 Main 文件，是整个程序的入口，到时候也是从这里开始运行的。<br>默认的代码里面，执行的是 JD 预约抢购的代码，而我需要的是有货就下单，于是到官方教程复制相关代码并进行替换。<br><img src="https://blog.woohoo.top/images/JD-Assistant-Using-Manual/function_change.png" srcset="/img/loading.gif" lazyload alt="main.py更换函数"></p>
+<ol>
+<li>main.py（抢购数据）</li>
+<li>sku_ids：将需要抢购的商品 id 放到这里，参考教程点<a target="_blank" rel="noopener" href="https://github.com/tychxn/jd-assistant/wiki/1.-%E4%BA%AC%E4%B8%9C%E6%8A%A2%E8%B4%AD%E5%8A%A9%E6%89%8B%E7%94%A8%E6%B3%95#2-%E8%8E%B7%E5%8F%96%E5%95%86%E5%93%81id%E5%B9%B6%E5%8C%BA%E5%88%86%E7%B1%BB%E5%9E%8B">这里</a></li>
+<li>area：检查是否有库存的地区，获取代码的教程在<a target="_blank" rel="noopener" href="https://github.com/tychxn/jd-assistant/wiki/3.-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98#2-%E5%9C%B0%E5%9D%80id%E5%9C%A8%E5%93%AA%E9%87%8C%E6%9F%A5%E8%AF%A2">这里</a></li>
+<li>其他参数根据 main.py 的描述，酌情更改即可。</li>
+</ol>
+<hr>
+<h1 id="三-Python-及其环境的安装"><a href="#三-Python-及其环境的安装" class="headerlink" title="三. Python 及其环境的安装"></a>三. Python 及其环境的安装</h1><h2 id="3-1-Python-安装"><a href="#3-1-Python-安装" class="headerlink" title="3.1 Python 安装"></a>3.1 Python 安装</h2><p>自行找教程安装，python2.x 或者 python3.x 都行。</p>
+<h2 id="3-2-依赖安装"><a href="#3-2-依赖安装" class="headerlink" title="3.2 依赖安装"></a>3.2 依赖安装</h2><p>-&gt; <a target="_blank" rel="noopener" href="https://github.com/tychxn/jd-assistant#%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93">官方教程</a><br>直接参考官方教程，打开命令提示符（/ 终端）。<br>切换 (cd 命令) 到京东抢购助手的解压目录下，<br>输入 pip install -r requirements.txt 并回车。<br><img src="https://blog.woohoo.top/images/JD-Assistant-Using-Manual/requirements.png" srcset="/img/loading.gif" lazyload alt="依赖安装"><br>上面的示例图以 Windows10 下，Python2.7 为例，系统和版本不同可能操作略有不同。</p>
+<hr>
+<h1 id="四-京东抢购助手的使用"><a href="#四-京东抢购助手的使用" class="headerlink" title="四. 京东抢购助手的使用"></a>四. 京东抢购助手的使用</h1><h2 id="4-1-PyCharm-环境"><a href="#4-1-PyCharm-环境" class="headerlink" title="4.1 PyCharm 环境"></a>4.1 PyCharm 环境</h2><ol>
+<li>下载安装 PyCharm（自行百度）</li>
+<li>使用 PyCharm 新建工程（自行百度）</li>
+<li>将解压（已更改配置）的所有文件复制到工程文件夹下</li>
+<li>打开 main.py 点击绿色按钮运行<br><img src="https://blog.woohoo.top/images/JD-Assistant-Using-Manual/pycharm_running.png" srcset="/img/loading.gif" lazyload alt="PyCharm运行截图"></li>
+</ol>
+<h2 id="4-2-IDLE（自带）环境"><a href="#4-2-IDLE（自带）环境" class="headerlink" title="4.2 IDLE（自带）环境"></a>4.2 IDLE（自带）环境</h2><ol>
+<li>在开始菜单 / 应用列表 打开 Python IDLE.</li>
+<li>选择上方菜单栏 File - Open… 打开解压目录下的 main.py</li>
+<li>选择弹出窗口上方菜单栏 Run - Run Module 运行即可<br><img src="https://blog.woohoo.top/images/JD-Assistant-Using-Manual/IDLE_running.png" srcset="/img/loading.gif" lazyload alt="IDLE运行截图"></li>
+</ol>
+<h2 id="4-3-终端（bash-cmd-环境"><a href="#4-3-终端（bash-cmd-环境" class="headerlink" title="4.3 终端（bash/cmd) 环境"></a>4.3 终端（bash/cmd) 环境</h2><ol>
+<li><p>windows 下，按键盘 Win+R，输入 cmd 并回车打开命令提示符。<br>（MacOS / Linux 用户打开系统终端应用）</p>
+</li>
+<li><p>切换工作目录到刚才解压的项目目录下。</p>
+</li>
+</ol>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vim">D:<br><span class="hljs-keyword">cd</span> D:\WorkSpace\<span class="hljs-keyword">python</span>\jd-assistant<br><span class="hljs-keyword">python</span> main.<span class="hljs-keyword">py</span><br></code></pre></td></tr></table></figure>
+
+<p>（参考命令，具体换成自己的路径）</p>
+<hr>
+<h1 id="五-常见问题汇总"><a href="#五-常见问题汇总" class="headerlink" title="五. 常见问题汇总"></a>五. 常见问题汇总</h1><h2 id="5-1-我的电脑是-XXX-系统，能运行吗？"><a href="#5-1-我的电脑是-XXX-系统，能运行吗？" class="headerlink" title="5.1 我的电脑是 XXX 系统，能运行吗？"></a>5.1 我的电脑是 XXX 系统，能运行吗？</h2><p>只要能安装 Python 就行，包括但不限于各个版本的 Windows、MacOS 和 Linux 各发行版。</p>
+<h2 id="5-2-Windows-命令提示符下中文乱码问题"><a href="#5-2-Windows-命令提示符下中文乱码问题" class="headerlink" title="5.2 Windows 命令提示符下中文乱码问题"></a>5.2 Windows 命令提示符下中文乱码问题</h2><p>执行 python main.py 前先执行 chcp 65001，该命令将 cmd 的编码格式改为 utf8。</p>
+<h2 id="5-3-程序抛出-UnicodeDecodeError-异常，影响观察抢购情况"><a href="#5-3-程序抛出-UnicodeDecodeError-异常，影响观察抢购情况" class="headerlink" title="5.3 程序抛出 UnicodeDecodeError 异常，影响观察抢购情况"></a>5.3 程序抛出 UnicodeDecodeError 异常，影响观察抢购情况</h2><p>在 jd_assistant.py 文件中，添加如下语句，将输出编码改为 utf8 而不是 ascii。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs stylus">import sys<br><br><span class="hljs-function"><span class="hljs-title">reload</span><span class="hljs-params">(sys)</span></span><br>sys<span class="hljs-selector-class">.setdefaultencoding</span>(<span class="hljs-string">&#x27;utf8&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<h2 id="5-4-如何创建快捷方式一键启动脚本"><a href="#5-4-如何创建快捷方式一键启动脚本" class="headerlink" title="5.4 如何创建快捷方式一键启动脚本"></a>5.4 如何创建快捷方式一键启动脚本</h2><h3 id="5-4-1-windows"><a href="#5-4-1-windows" class="headerlink" title="5.4.1 windows"></a>5.4.1 windows</h3><p>在项目解压文件夹下，新建文本文档，将以下代码写入后保存。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vim">chcp <span class="hljs-number">65001</span><br><span class="hljs-keyword">python</span> main.<span class="hljs-keyword">py</span><br></code></pre></td></tr></table></figure>
+
+<p>重命名文件后缀为.bat 文件，双击.bat 文件即可快速启动。</p>
+<h3 id="5-4-2-Linux-MacOS"><a href="#5-4-2-Linux-MacOS" class="headerlink" title="5.4.2 Linux/MacOS"></a>5.4.2 Linux/MacOS</h3><p>用 vim/nano 等文本编辑器新建一个.sh 文件</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">vim</span> start.<span class="hljs-keyword">sh</span><br></code></pre></td></tr></table></figure>
+
+<p>往里面写入以下代码后保存（python 后跟项目解压文件绝对路径）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br>python ~/jd-assistant/main.py<br></code></pre></td></tr></table></figure>
+
+<p>下次在 start.sh 所在文件夹输入./start.sh 即可启动。<br>有特殊需要的通过 ln 创建快捷方式或者加入 PATH，写个.desktop 等的自行百度学习。</p>
+<h2 id="5-5-去哪里获取在售口罩的-sku-ids？"><a href="#5-5-去哪里获取在售口罩的-sku-ids？" class="headerlink" title="5.5 去哪里获取在售口罩的 sku_ids？"></a>5.5 去哪里获取在售口罩的 sku_ids？</h2><p><a href="https://blog.woohoo.top/files/jd-assistant_facemask_sku_ids.txt">这里</a>有一份从 tg 群中拿到的 ids，具体商品未知，可自行确认和使用。</p>
+<h1 id="六-其它问题"><a href="#六-其它问题" class="headerlink" title="六. 其它问题"></a>六. 其它问题</h1><p>如果有错误还望见谅并指出，再次感谢项目作者：<a target="_blank" rel="noopener" href="https://github.com/tychxn">Tychxn</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Tutorials/">Tutorials</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Life/">Life</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://blog.woohoo.top/2020/02/JD-Assistant-Using-Manual/';
+          this.page.identifier = '/2020/02/JD-Assistant-Using-Manual/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'emmett-woos-blog' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        粤ICP备20034331号
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44512202000075"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" alt="police-icon"/>
+            
+            <span>粤公网安备44512202000075号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-113893769-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
